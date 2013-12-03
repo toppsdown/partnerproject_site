@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Linkshare::Application.config.secret_key_base = '54851b0132fe02bad678b5f1bc64dc88755d56075bb4372aa04b2f336a3b70ad7452ecf24dbe1e69d1b5c1097638f886da5fec1db8f58912ae6f369228611c6d'
+Linkshare::Application.config.secret_key_base = 'd22bea75187eaed7696ec37a46e90369ef54aca7146783b70ed16ebd83bb66fb8090526578c099dadbfe5cd7fbeb0882857d24de25c5e4c7f642ff3f2d534113'
