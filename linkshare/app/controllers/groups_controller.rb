@@ -6,12 +6,12 @@ class GroupsController < ApplicationController
 	def index
 		# display list of groups for user to add
     # should be ordered by most relevant/popular
-    @groups = Group.order('name')
+    @groups = Group.order(:name)
 	end
 
 	def show
 		# displays group information
-    unless @group = Group.find_by(id: params[:id])
+    unless @group = Group.find_by_id params[:id]
       redirect_to :back, notice: "This group does not exist"
 	end
 
@@ -38,7 +38,7 @@ class GroupsController < ApplicationController
 	def update
 		# saves data from edit
 		@group = Group.find_by(id: params[:id])
-		if @group.update(params[:group].permit(:network_id, :name,:description,:img_url))
+		if @group.update(group_params)
       redirect_to @group
     else
       render 'edit'
