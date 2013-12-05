@@ -1,6 +1,7 @@
 Linkshare::Application.routes.draw do
 
   devise_for :users
+  resources :users, only: [:index]
   resources :groups do
     member do
       get 'join'
@@ -9,7 +10,7 @@ Linkshare::Application.routes.draw do
   end
   #resources :networks
   resources :shares
-  root 'user#index'
+  root 'users#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

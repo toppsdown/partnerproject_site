@@ -1,0 +1,23 @@
+<h1>Lists of yo shit</h1>
+
+<div class="row">
+  <div class="large-6 columns">
+    <h3>List of your shares</h3>
+    <ul>
+      <% @shares.each do |s| %>
+      <li><%= link_to s.link.url%></li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="large-6 columns">
+    <h3>List of your groups</h3>
+    <ul>
+      <% @groups.each do |g| %>
+      <li><%= link_to g.name, g%></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+
+

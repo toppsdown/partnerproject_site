@@ -8,6 +8,14 @@
 </head>
 <body>
 
+<% if current_user %>
+<%= link_to "logout", destroy_user_session_path, :method => :delete %>
+<% else %>
+<%= link_to "sign in", new_user_session_path %>
+<% end %>
+
+<%= render 'partials/navigation' %>
+
 <%= yield %>
 
 </body>

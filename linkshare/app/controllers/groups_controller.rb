@@ -1,7 +1,7 @@
 class GroupsController < ApplicationController
 	# add group owner to group entry.  Only this user can edit group
 	# before filter only: destroy isOwner
-
+  before_filter :authenticate_user!
 
   def index
   # display list of groups for user to add
