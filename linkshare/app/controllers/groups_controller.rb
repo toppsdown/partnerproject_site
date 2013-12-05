@@ -13,6 +13,7 @@ class GroupsController < ApplicationController
 		# displays group information
     unless @group = Group.find_by_id(params[:id])
       redirect_to :back, notice: "This group does not exist"
+    end
 	end
 
 	def new
@@ -27,7 +28,8 @@ class GroupsController < ApplicationController
 			redirect_to @group
 		else
 			render 'new'
-   end
+    end
+  end
 
    def edit
 		# provides same form as new
