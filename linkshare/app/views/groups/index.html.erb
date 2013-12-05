@@ -1,0 +1,7 @@
+<h1>List of Groups</h1>
+
+<ul>
+  <% @groups.each do |g| %>
+    <li><%= link_to g.name, g %></li>
+  <% end %>
+</ul>
