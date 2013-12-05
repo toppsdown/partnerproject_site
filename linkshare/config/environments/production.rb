@@ -78,6 +78,7 @@ Linkshare::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
+<<<<<<< HEAD
   # Allows your site to be in outasite Iframes!!!!
   config.action_dispatch.default_headers = {
     'X-Frame-Options' => 'ALLOWALL'
@@ -88,4 +89,9 @@ Linkshare::Application.configure do
   EMBEDLY_API_PW='21aa06b08db74603baf264437dde87a8'
   EMBEDLY_API_APP="SIB-BW-GroupProject"
 
+=======
+  config.action_dispatch.default_headers = {
+    'X-Frame-Options' => 'ALLOWALL'
+  }
+>>>>>>> 30ad298c027fc058b1b8cd50c37fd14557e853f0
 end

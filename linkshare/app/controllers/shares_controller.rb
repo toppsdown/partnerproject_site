@@ -9,10 +9,11 @@ class SharesController < ApplicationController
   def new
     # responds to extension button click with a form
     # get the embedly for link URL
+    
     @share = current_user.shares.new()
-    #@share.build_link(:url=> "http://www.leekspin.com")#params[:url])
-    @share.build_link
-
+    @share.build_link(url: params[:url])
+    #raise @share.link.inspect
+    #@share.build_link
     respond_to do |format|
       format.html { render :layout => false }
     end

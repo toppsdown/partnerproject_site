@@ -1,4 +1,9 @@
 <h1>List of link titles</h1>
 
-<h2>Last ID: <%= @shares.last.link_id %></h2
+<ul>
+  <% @shares.each do |s| %>
+    <li><%= link_to s.link.url%></li>
+  <% end %>
+</ul>
+
 
