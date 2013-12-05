@@ -55,6 +55,19 @@ class GroupsController < ApplicationController
     redirect_to groups_path
 	end
 
+  def join
+    @group = Group.find_by(id: params[:id])
+    @group.update_attributes(user_ids: current_user.id)
+    @group.save
+    redirect_to @group
+  end
+
+  def leave
+    @group=Group.find_by(id: params[:id])
+    @group.users.delete(User.find current_user.id)
+    redirect_to @group
+  end
+
 	private
   def group_params
    params.require(:group).permit(:network_id,:name,:description,:img_url)

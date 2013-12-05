@@ -1,7 +1,12 @@
 Linkshare::Application.routes.draw do
 
   devise_for :users
-  resources :groups
+  resources :groups do
+    member do
+      get 'join'
+      get 'leave'
+    end
+  end
   #resources :networks
   resources :shares
   root 'user#index'
