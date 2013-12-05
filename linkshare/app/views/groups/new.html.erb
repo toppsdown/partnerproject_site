@@ -1,0 +1,12 @@
+<h1>Fill me out to make a group</h1>
+<%= form_for @group do |f| %>
+  <div class="row">
+    <div class="large-4 columns"><%= f.label "Group Name" %><%= f.text_field :name %></div>
+  </div>
+  <div class="row">
+    <div class="large-4 columns"><%= f.label "Group Description" %><%= f.text_area :description %></div>
+  </div>
+  <div class="row">
+    <div class="large-2 columns"><%= f.button %></div>
+  </div>
+<% end %>
