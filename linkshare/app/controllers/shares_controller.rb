@@ -1,18 +1,28 @@
 class SharesController < ApplicationController
 
+  before_filter :authenticate_user!
+
+  def index
+    @shares = Share.order(:id)
+  end
+
   def new
     # responds to extension button click with a form
     # get the embedly for link URL
-    @share = User.Share.new()
-    @link = User.Link.new(params[:url])
-    session[:link] = @link
+    @share = current_user.shares.new()
+    @link = Link.new(url: "http://www.leekspin.com")#params[:url])
+    user_session[:link] = @link
+
+    respond_to do |format|
+      format.html { render :layout => false }
+    end
   end
 
   def create
     # uses data from extension to generate share
     # send to link model to create/return existing link
     # save to Share
-    @link = session[:link]
+    @link = user_session[:link]
     share_params[:link_id] = @link[:id]
     @share = User.Share(share_params)
     @link.save
