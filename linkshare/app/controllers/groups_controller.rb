@@ -5,14 +5,14 @@ class GroupsController < ApplicationController
 
 	def index
 		# display list of groups for user to add
-    # should be ordered by most relevant/popular
-    @groups = Group.order(:name)
+    	# should be ordered by most relevant/popular
+    	@groups = Group.order(:name)
 	end
 
 	def show
 		# displays group information
-    unless @group = Group.find_by_id(params[:id])
-      redirect_to :back, notice: "This group does not exist"
+    	unless @group = Group.find_by_id(params[:id])
+      		redirect_to :back, notice: "This group does not exist"
 	end
 
 	def new
@@ -27,7 +27,8 @@ class GroupsController < ApplicationController
 			redirect_to @group
 		else
 			render 'new'
-   end
+		end
+   	end
 
    def edit
 		# provides same form as new
@@ -39,13 +40,13 @@ class GroupsController < ApplicationController
 		# saves data from edit
 		@group = Group.find_by(id: params[:id])
 		if @group.update(group_params)
-      redirect_to @group
-    else
-      render 'edit'
-    end
-  end
+     		redirect_to @group
+    	else
+      		render 'edit'
+    	end
+	end
 
-  def destroy
+  	def destroy
 		# removes group from database
 		# eventually removes all entries from usergroups table
     @group = Group.find_by(id: params[:id])
@@ -54,8 +55,8 @@ class GroupsController < ApplicationController
 	end
 
 	private
-  def group_params
-   params.require(:group).permit(:network_id,:name,:description,:img_url)
- end
+  	def group_params
+   	params.require(:group).permit(:network_id,:name,:description,:img_url)
+ 	end
 
 end

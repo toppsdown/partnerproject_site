@@ -33,7 +33,7 @@ Linkshare::Application.configure do
   }
 
 
-
+#embedly api info
   EMBEDLY_API_USER='jbradfield13@cornellcollege.edu'
   EMBEDLY_API_PW='21aa06b08db74603baf264437dde87a8'
 end
