@@ -27,7 +27,17 @@ Linkshare::Application.configure do
   # number of complex assets.
   config.assets.debug = true
 
+
+
+  # Allows your site to be in outasite Iframes!!!!
   config.action_dispatch.default_headers = {
     'X-Frame-Options' => 'ALLOWALL'
   }
+
+
+#embedly api info
+  EMBEDLY_API_USER='jbradfield13@cornellcollege.edu'
+  EMBEDLY_API_PW='21aa06b08db74603baf264437dde87a8'
+  EMBEDLY_API_APP='SIB-BW-GroupProject'
+
 end
