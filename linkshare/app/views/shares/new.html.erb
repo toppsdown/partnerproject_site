@@ -6,8 +6,8 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
-<body height="100%">
-<h1><%= @share.link.title %></h1>
+<body height="100px">
+<h1><%= @share.link.url %></h1>
   <%= form_for @share do |s| %>
   <div class="row">
     <div id="ls_logo" class="small-1 large-1 columns">Logo</div>
