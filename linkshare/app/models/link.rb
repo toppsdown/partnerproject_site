@@ -1,6 +1,9 @@
 class Link < ActiveRecord::Base
   has_many :shares, dependent: :destroy
+  
+
   after_initialize :fillin
+
   # get title, description, and image_url from embedly
   # save this info maybe?
   # override new Link to get embed.ly information
@@ -8,14 +11,15 @@ class Link < ActiveRecord::Base
   def fillin
     # lookup whether entry exists in DB
 
-    if found_entry = Link.find_by(url: self.url)
+    # TRIED TO SAVE CALLS TO EMBEDLY BUT FUCK THAT
+    #if found_entry = Link.find_by(url: self.url)
     # if so, fill in info
-      self.title = "Holy Crap" #found_entry.title
-      self.description = found_entry.description
-    else
+    #  self.title = "Holy Crap" #found_entry.title
+    #  self.description = found_entry.description
+    #else
       # if not, generate embedly content
       self.embedly
-    end
+    #end
   end
 
   def embedly

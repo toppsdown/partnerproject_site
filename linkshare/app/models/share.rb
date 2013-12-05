@@ -4,6 +4,8 @@ class Share < ActiveRecord::Base
   belongs_to :group
   belongs_to :network
 
+accepts_nested_attributes_for :link
+
   #has_many_and_belongs_to :tags
 
   # upvote function

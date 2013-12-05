@@ -11,7 +11,7 @@ class GroupsController < ApplicationController
 
 	def show
 		# displays group information
-    unless @group = Group.find_by_id params[:id]
+    unless @group = Group.find_by_id(params[:id])
       redirect_to :back, notice: "This group does not exist"
 	end
 

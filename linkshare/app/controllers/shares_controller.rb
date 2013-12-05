@@ -10,8 +10,8 @@ class SharesController < ApplicationController
     # responds to extension button click with a form
     # get the embedly for link URL
     @share = current_user.shares.new()
-    @link = Link.new(url: "http://www.leekspin.com")#params[:url])
-    user_session[:link] = @link
+    #@share.build_link(:url=> "http://www.leekspin.com")#params[:url])
+    @share.build_link
 
     respond_to do |format|
       format.html { render :layout => false }
@@ -22,10 +22,8 @@ class SharesController < ApplicationController
     # uses data from extension to generate share
     # send to link model to create/return existing link
     # save to Share
-    @link = user_session[:link]
-    share_params[:link_id] = @link[:id]
-    @share = User.Share(share_params)
-    @link.save
+    @share = current_user.shares.new(share_params)
+    @share.build_link(share_params[:link_attributes])
     @share.save
   end
 
@@ -44,11 +42,12 @@ class SharesController < ApplicationController
 
   private
   def share_params
-   params.require(:share).permit(:network_id,:name,:description,:img_url)
+   params.require(:share).permit(:user_id,:link_id,:network_id,:group_id,:reads,:votes,
+    :link_attributes => [:id,:title,:description,:url])
   end
 
-  def link_params
-    params.require(:link).permit(:url)
-  end
+  #def link_params
+  #  params.require(:link).permit(:url)
+  #end
 
 end
