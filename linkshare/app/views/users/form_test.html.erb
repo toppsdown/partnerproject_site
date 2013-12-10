@@ -1,0 +1,22 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+
+
+  <% if @groups.size <= 1 %>
+    <% @groups.each do |g| %>
+      <%= check_box_tag "form", value=g.id, checked=false %>
+
+      <% end %>
+  <% else %>
+    <% 3.times do |i| %>
+      <%= check_box_tag "form", value=@groups[i].id, checked=false %>
+      <%= label 
+    <% end %>
+  <% end %>
+
+
+</body>
+</html>

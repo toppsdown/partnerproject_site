@@ -7,4 +7,12 @@ class UsersController < ApplicationController
     @groups = current_user.groups
   end
 
+  def form_test
+    @share = current_user.shares.new()
+    @groups = current_user.groups
+    respond_to do |format|
+      format.html { render :layout => false }
+    end
+  end
+
 end

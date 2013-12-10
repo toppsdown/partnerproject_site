@@ -12,6 +12,7 @@ class SharesController < ApplicationController
     
     @share = current_user.shares.new()
     @share.build_link(url: params[:url])
+    @groups = current_user.groups
     #raise @share.link.inspect
     #@share.build_link
     respond_to do |format|

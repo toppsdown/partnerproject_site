@@ -2,6 +2,7 @@ Linkshare::Application.routes.draw do
 
   devise_for :users
   resources :users, only: [:index]
+  get 'users/form_test' => 'users#form_test'
   resources :groups do
     member do
       get 'join'
