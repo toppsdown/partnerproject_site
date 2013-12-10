@@ -5,7 +5,7 @@
     <h3>List of your shares</h3>
     <ul>
       <% @shares.each do |s| %>
-      <li><%= link_to s.link.url%></li>
+      <li><%= link_to s.link.url, s.link.url%></li>
       <% end %>
     </ul>
   </div>

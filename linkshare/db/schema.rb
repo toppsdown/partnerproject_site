@@ -11,10 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131204213734) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 20131205152329) do
 
   create_table "groups", force: true do |t|
     t.integer "network_id"
@@ -33,6 +30,7 @@ ActiveRecord::Schema.define(version: 20131204213734) do
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "img_url"
   end
 
   create_table "networks", force: true do |t|

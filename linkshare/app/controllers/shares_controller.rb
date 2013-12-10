@@ -26,6 +26,9 @@ class SharesController < ApplicationController
     @share = current_user.shares.new(share_params)
     @share.build_link(share_params[:link_attributes])
     @share.save
+    respond_to do |format|
+      format.html { render :layout => false }
+    end
   end
 
   def edit
