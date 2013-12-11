@@ -1,8 +1,10 @@
+require("#{Rails.root}/app/classes/embedder.rb")
 class Link < ActiveRecord::Base
+  include Embedder
   has_many :shares, dependent: :destroy
 
 
-  after_initialize :fillin
+  before_save :fillin
 
   # get title, description, and image_url from embedly
   # save this info maybe?
@@ -26,37 +28,11 @@ class Link < ActiveRecord::Base
 
   def embedly
     # do some embedly stuff
-    embedder = Embedder.new(self.url);
-    embedder.getBasics() do |title,description,thumbnail|
-      self.title = title
-      self.description = description
+    siteinfo = getBasics(self.url) do |data|
+      console.LOG(data);
+      self.title = data[0]
+      self.description = data[1]
+      self.img_url= data[2]
     end
   end
-end
-
-private
-class Embedder
-  require 'embedly'
-  require 'json'
-
-  @embedly_api=nil
-  @url=nil
-
-  def initialize(url='www.leekspin.com')
-    @url = url
-    ######## adds the user 
-      @embedly_api = Embedly::API.new :key => EMBEDLY_API_PW, :user_agent => "Mozilla/5.0 (compatible;  SIB-BW-GroupProject/1.0;  jbradfield13@cornellcollege.edu )"
-  end
-
-
-  def getBasics()
-    embeded_object = @embedly_api.oembed :url => 'www.xkcd.com'
-    embeded_object=embeded_object[0].marshal_dump
-    title=embeded_object[:title]
-    description=embeded_object[:description]
-    thumbnail_url=embeded_object[:thumbnail_url]
-    return title, description, thumbnail_url
-  end
-
-
 end

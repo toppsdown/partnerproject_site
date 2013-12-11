@@ -1,20 +1,19 @@
-class Embedder
+module Embedder
 	require 'embedly'
 	require 'json'
 
 	@embedly_api
-	@url
 
-	def initialize(url='www.leekspin.com')
-		@url = url
+	def initialize()
 		######## adds the user 
-			embedly_api = 
-				Embedly::API.new :key => EMBEDLY_API_PW, :user_agent => "Mozilla/5.0 (compatible;  #{EMBEDLY_API_APP};  #{EMBEDLy_API_USER} )"
+			@embedly_api = 
+				Embedly::API.new :key => EMBEDLY_API_PW, :user_agent => "Mozilla/5.0 (compatible;  #{EMBEDLY_API_APP};  #{EMBEDLY_API_USER} )"
 	end
 
 
-	def getBasics()
-		embeded_object = embedly_api.oembed :url => 'www.xkcd.com'
+	def getBasics(url)
+		initialize();
+		embeded_object = @embedly_api.oembed :url => url
 		embeded_object=embeded_object[0].marshal_dump
 		title=embeded_object[:title]
 		description=embeded_object[:description]
