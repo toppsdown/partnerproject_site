@@ -24,9 +24,14 @@ class SharesController < ApplicationController
     # uses data from extension to generate share
     # send to link model to create/return existing link
     # save to Share
-    @share = current_user.shares.new(share_params)
-    @share.build_link(share_params[:link_attributes])
-    @share.save
+    @groups = params[:groups]
+    if @groups
+      @groups.each do |gid|
+        @share = current_user.shares.new(share_params)
+        @share.build_link(share_params[:link_attributes])
+        @share.save
+      end
+    end
     respond_to do |format|
       format.html { render :layout => false }
     end
@@ -50,6 +55,8 @@ class SharesController < ApplicationController
    params.require(:share).permit(:user_id,:link_id,:network_id,:group_id,:reads,:votes,
     :link_attributes => [:id,:title,:description,:url])
   end
+
+
 
   #def link_params
   #  params.require(:link).permit(:url)
