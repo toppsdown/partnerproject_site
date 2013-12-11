@@ -13,7 +13,20 @@
       <%= link_to image_tag("logo.png"), root_path, :target=>"_blank" %>
     </div>
     <div id="groups" class="small-4 large-4 columns">
-      
+      <% i = 0 %>
+    <% @groups.each do |g| %>
+    <div class="group-block">
+      <% if i < 3%>
+      <% checkbox_name = "groups[" + g.id.to_s + "]" %>
+      <% checkbox_id = "groups_" + g.id.to_s %>
+      <%= check_box_tag checkbox_name, value=@groups[i].id, checked=false, {:class=>"group-select"}%>
+      <%= label_tag g.name, image_tag("g.jpeg"), :for=>checkbox_id, :class=>"group-off"%>
+      <% else %>
+      <p>This will be a dropdown</p>
+      <% end %>
+      <% i = i + 1 %>
+    </div>
+    <% end %>
     </div>
     <div id="link_info" class="small-5 large-5 columns">
       <%= s.hidden_field :network_id, value:1%>
