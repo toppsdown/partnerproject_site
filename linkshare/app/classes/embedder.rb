@@ -4,7 +4,7 @@ module Embedder
 
 	@embedly_api
 
-	def initialize()
+	def setup()
 		######## adds the user 
 			@embedly_api = 
 				Embedly::API.new :key => EMBEDLY_API_PW, :user_agent => "Mozilla/5.0 (compatible;  #{EMBEDLY_API_APP};  #{EMBEDLY_API_USER} )"
@@ -12,7 +12,7 @@ module Embedder
 
 
 	def getBasics(url)
-		initialize();
+		setup();
 		embeded_object = @embedly_api.oembed :url => url
 		embeded_object=embeded_object[0].marshal_dump
 		title=embeded_object[:title]
