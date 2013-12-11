@@ -3,19 +3,21 @@
   <title></title>
 </head>
 <body>
-
-
-  <% if @groups.size <= 1 %>
+    <% i = 0 %>
     <% @groups.each do |g| %>
-      <%= check_box_tag "form", value=g.id, checked=false %>
-
+      <% if i < 3%>
+      <% checkbox_name = "groups[" + g.id.to_s + "]" %>
+      <% checkbox_id = "groups_" + g.id.to_s %>
+      <%= check_box_tag checkbox_name, value=@groups[i].id, checked=false %>
+      <%= label_tag g.name, image_tag("g.jpeg"), :for=>checkbox_id %>
+      <% else %>
+      <p>This will be a dropdown</p>
       <% end %>
-  <% else %>
-    <% 3.times do |i| %>
-      <%= check_box_tag "form", value=@groups[i].id, checked=false %>
-      <%= label 
+      <% i = i + 1 %>
     <% end %>
-  <% end %>
+
+<br />
+
 
 
 </body>

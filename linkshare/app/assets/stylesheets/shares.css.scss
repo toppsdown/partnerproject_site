@@ -15,3 +15,21 @@ body {
 .solo-row{
   height: 100%;
 }
+
+.group-select {
+  position: absolute;
+    top: -9999px;
+    left: -9999px;
+}
+
+.group-select:checked ~ label {
+  opacity: 1;
+}
+
+.group-off {
+  opacity: 0.5;
+}
+
+.group-block {
+  display: inline-block;
+}
