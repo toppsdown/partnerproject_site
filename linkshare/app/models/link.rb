@@ -4,15 +4,22 @@ class Link < ActiveRecord::Base
   has_many :shares, dependent: :destroy
 
 
-  before_save :fillin
+  before_save :check_if_original
 
   # get title, description, and image_url from embedly
   # save this info maybe?
   # override new Link to get embed.ly information
       #raise @share.link.inspect
 
+  private
+  def check_if_original
 
-  def fillin
+    self.embedly
+
+    origin = Link.where(title: self.title,description: self.description)
+    if origin
+      return origin
+    end
     # lookup whether entry exists in DB
 
     # TRIED TO SAVE CALLS TO EMBEDLY BUT FUCK THAT
@@ -21,9 +28,7 @@ class Link < ActiveRecord::Base
     #  self.title = "Holy Crap" #found_entry.title
     #  self.description = found_entry.description
     #else
-      # if not, generate embedly content
-      self.embedly
-    #end
+
   end
 
   def embedly
