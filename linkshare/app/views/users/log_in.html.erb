@@ -6,6 +6,11 @@
   <%= csrf_meta_tags %>
 </head>
 <body id ='tool-bar-body'>
+  <div class="row extension">
+    <div class="small-4 large-4 columns">
+      <%= render partial: "partials/logo_link" %>
+    </div>
+    <div class="small-8 large-8 columns">
 	<ul id='sign-up-form'>
 	<%= form_for("user", :url => user_session_path) do |f| %>
 	 	<li>
@@ -22,4 +27,6 @@
 	  <%= link_to "Forgot your password?", new_password_path('user') %>
 	<% end %>
 	</ul>
+</div>
+</div>
 </body>
