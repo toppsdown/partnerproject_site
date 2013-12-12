@@ -11,12 +11,20 @@ class Link < ActiveRecord::Base
   # override new Link to get embed.ly information
       #raise @share.link.inspect
 
-  private
+  def embedly
+    # do some embedly stuff
+    siteinfo = getBasics(self.url) 
+      puts siteinfo
+      self.title = siteinfo[0]
+      self.description = siteinfo[1]
+      self.img_url= siteinfo[2]
+  end
+
   def check_if_original
 
     self.embedly
 
-    origin = Link.where(title: self.title,description: self.description)
+    origin = Link.where(title: self.title, description: self.description)
     if origin
       return origin
     end
@@ -31,13 +39,6 @@ class Link < ActiveRecord::Base
 
   end
 
-  def embedly
-    # do some embedly stuff
-    siteinfo = getBasics(self.url) do |data|
-      console.LOG(data);
-      self.title = data[0]
-      self.description = data[1]
-      self.img_url= data[2]
-    end
-  end
+
+
 end
