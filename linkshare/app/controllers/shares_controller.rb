@@ -30,8 +30,8 @@ class SharesController < ApplicationController
     @groups = params[:groups]
     #@groups << current_user.id
     if @groups
-      @groups.each do |gid|
-        @share = current_user.shares.new(share_params)
+      @groups.each do |g_id|
+        @share = current_user.shares.new(share_params, :group_id => g_id, )
         @share.build_link(share_params[:link_attributes])
         @share.save
       end
