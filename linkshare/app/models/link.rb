@@ -12,11 +12,22 @@ class Link < ActiveRecord::Base
       #raise @share.link.inspect
 
 
+  def embedly
+    # do some embedly stuff
+    siteinfo = getBasics(self.url) 
+      puts siteinfo
+      self.title = siteinfo[0]
+      self.description = siteinfo[1]
+      self.img_url= siteinfo[2]
+  end
+
+
   def check_if_original
 
     self.embedly
 
     if origin = Link.where(title: self.title,description: self.description) 
+
       return origin
     end
     # lookup whether entry exists in DB
@@ -30,13 +41,6 @@ class Link < ActiveRecord::Base
 
   end
 
-  def embedly
-    # do some embedly stuff
-    siteinfo = getBasics(self.url) do |data|
-      console.LOG(data);
-      self.title = data[0]
-      self.description = data[1]
-      self.img_url= data[2]
-    end
-  end
+
+
 end

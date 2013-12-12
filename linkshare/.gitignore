@@ -16,4 +16,4 @@
 /tmp
 
 #ignore my env file ders magic in der
-/config/environments*.rb
+/config/environments/*.rb

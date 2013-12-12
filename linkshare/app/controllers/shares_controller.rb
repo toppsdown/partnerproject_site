@@ -25,6 +25,7 @@ class SharesController < ApplicationController
     # send to link model to create/return existing link
     # save to Share
     @groups = params[:groups]
+    #@groups << current_user.id
     if @groups
       @groups.each do |gid|
         @share = current_user.shares.new(share_params)
