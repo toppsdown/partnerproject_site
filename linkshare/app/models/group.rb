@@ -14,8 +14,10 @@ class Group < ActiveRecord::Base
     errors.add(:network_id, "Network is not valid") unless Network.find_by_id(self.network_id)
   end
 
-  def is_solo?
-    self.solo?
+def find_owner
+    if self.solo?
+      self.users.where(:my_group => self.id).first
+    end
   end
 
 end

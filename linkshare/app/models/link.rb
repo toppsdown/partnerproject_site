@@ -5,7 +5,7 @@ class Link < ActiveRecord::Base
 
 
   before_save :check_if_original
-  after_initialize :check_if_original
+  #after_initialize :check_if_original
 
   # get title, description, and image_url from embedly
   # save this info maybe?

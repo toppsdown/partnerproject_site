@@ -17,7 +17,7 @@ class SharesController < ApplicationController
     #@share.build_link(url: params[:url])
     #@share.link = Link.new(url: params[:url]).check_if_original
     @share.link = Link.get_original(params[:url])
-    @groups = current_user.groups.where(:private => false)
+    @groups = current_user.groups.where(:solo => false)
     #raise @share.link.inspect
     #@share.build_link
     respond_to do |format|
@@ -31,16 +31,14 @@ class SharesController < ApplicationController
     # save to Share
     @groups = params[:groups] || []
     @groups[current_user.my_group] = current_user.my_group
-    if @groups
-      @groups.each do |g_id|
+      @groups.each do |k, g_id|
         @share = current_user.shares.new(share_params)
-        @share.group_id = g_id
+        @share.group_id = g_id.to_i
         @share.network_id = current_user.network_id
         # this is really ugly, but it's the only way I could figure out how to not duplicate links
         @share.link = Link.get_original(share_params[:link_attributes][:url])
         #raise YAML::dump(@share.link)
         @share.save
-      end
     end
     respond_to do |format|
       format.html { render :layout => false }

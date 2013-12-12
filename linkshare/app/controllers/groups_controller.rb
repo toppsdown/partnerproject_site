@@ -11,9 +11,11 @@ class GroupsController < ApplicationController
 
   def show
 		# displays group information
-
     unless @group = Group.find_by_id(params[:id])
       redirect_to :back, notice: "This group does not exist"
+    end
+    if @group.solo?
+      @link_hash = @group.find_owner.get_owner_links
     end
   end
 

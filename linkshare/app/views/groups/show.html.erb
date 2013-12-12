@@ -3,9 +3,28 @@
 <div class="small-4 large-4 columns"><%= @group.description %></div>
 </div>
 <div class="row">
-<%if !(@group.users.find_by_id(current_user.id)) %>
-  <%= link_to 'join', join_group_path(@group), :class=>"button small" %>
-<%else%>
-  <%= link_to 'leave', leave_group_path(@group), :class=>"button small" %>
-<%end%>
+  <% if @group.solo? %>
+    <ul>
+    <% @link_hash.each do |l, a| %>
+      <li><%= link_to l.title, l.url %></li>
+  <% end %>
+</ul>
+  <% else %>
+    <%if !(@group.users.find_by_id(current_user.id))%>
+      <%= link_to 'join', join_group_path(@group), :class=>"button small" %>
+    <%else%>
+      <%= link_to 'leave', leave_group_path(@group), :class=>"button small" %>
+    <%end%>
+    
+      <% @group.shares.each do |s| %>
+        <div class="row shares">
+        <div class="small-2 large-2 columns">
+          <%= link_to s.user.email, group_path(:id => s.user.my_group), :class=>"small-4 large-4 columns"%>
+        </div>
+        <div class="small-10 large-10 columns">
+          <%= render partial: "partials/embedly", locals: {link: s.link}, :class=>"small-8 large-8 columns" %>
+        </div>
+        </div>
+      <%end%>
+  <%end%>
 </div>
