@@ -5,13 +5,13 @@
   <%= stylesheet_link_tag    "application", "" => true %>
   <%= csrf_meta_tags %>
 </head>
-<body id ='toolBarBody'>
+<body id ='tool-bar-body'>
 	<ul id='sign-up-form'>
 	<%= form_for("user", :url => user_session_path) do |f| %>
 	 	<li>
-	  <%= f.text_field :email %>
+	  <%= f.text_field :email, placeholder: 'email' %>
 		</li><li>
-	  <%= f.password_field :password %>
+	  <%= f.password_field :password, placeholder: 'password' %>
 		<li>
 	  <%= f.check_box :remember_me %>
 	  	</li><li>
