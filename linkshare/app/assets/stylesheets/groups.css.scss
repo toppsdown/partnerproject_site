@@ -19,41 +19,31 @@ body {
 .shares{
   border-bottom: 1px solid black;
   border-top: 1px solid black;
+  position: relative;
+  height: 200px;
 }
 
-.group-select {
-  position: absolute;
-    top: -9999px;
-    left: -9999px;
+.shares a{
+  display: block;
+  height:100%;
+  width:100%;
+  opacity: 0.7;
 }
 
-.group-select:checked ~ label {
-  opacity: 1;
+.shares a:hover {
+  opacity:1;
 }
 
-.group-off {
-  opacity: 0.5;
-}
-
-.group-block {
-  display: inline-block;
-}
-
-#link_info {
-  display: inline-block;
-}
-
-#link_info .link-icon {
-  width: auto;
-  max-height: 100%;
-  float: right;
-}
-
-#link_info h3 {
-  font-size: .7rem;
+.link_content h3 {
   font-weight: bold;
+  font-size: 1em;
 }
 
-#link_info h4 {
-  font-size: .7rem;
+.link_content h4 {
+  font-size: .7em;
+}
+
+.shares img {
+  max-height: 200px;
+  width: auto;
 }
