@@ -14,8 +14,13 @@ class SharesController < ApplicationController
     # get the embedly for link URL
     
     @share = current_user.shares.new()
+<<<<<<< Updated upstream
+    embedify @share.build_link(url: params[:url])
+    @groups = current_user.groups
+=======
     @share.build_link(url: params[:url])
     @groups = current_user.groups.where(:private => false)
+>>>>>>> Stashed changes
     #raise @share.link.inspect
     #@share.build_link
     respond_to do |format|

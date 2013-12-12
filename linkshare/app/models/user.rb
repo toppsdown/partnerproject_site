@@ -25,28 +25,27 @@ class User < ActiveRecord::Base
   # Currently network is just a magic value we have created
 
   def prereqs
-    link_network
+    create_or_link_network
     generate_group
   end
 
-  def link_network
+  def create_or_link_network
     # the only network we want to use is the default
-    network = Network.first
+    domain = self.email.split("@").last
+    network = Network.where(:email_domain=>domain).first || Network.new(:email_domain=>domain)
+    network.save
     self.network_id = network.id
   end
 
   def generate_group
+    # create a private group for this user
     users_group = Group.new(:network_id => self.network_id, :private => true, :name => self.email)
     if users_group.save
       self.my_group = users_group.id
     end
   end
 
-  def valid_group
-    errors.add(self.my_group, "Group is not valid") unless self.group_id.exists?
-  end
-
-  # after the user has been saved in the users table, link to its associated private group
+  # after the user has been saved in the users table, link to its associated private group in join table
   def link_group
     users_group = Group.find_by(id: self.my_group)
     if users_group

@@ -8,28 +8,32 @@ accepts_nested_attributes_for :link
 
 #before_save :authed
 
-# validate :validate_attrs
+# When creating a share, we must check that group_id, network_id, user_id, and link_id are valid
 
-#   def validate_attrs
-#     validate_group
-#   end
+ #validate :validate_attrs
 
-#   def validate_group
-#     raise "Holy Crap validate_group"
-#     errors.add(:group_id, "Group is not valid") unless :group_id.exists?
-#   end
+  # def validate_attrs
+  #   validate_group
+  #   validate_network
+  #   validate_user
+  #   validate_link
+  # end
 
-#   def validate_network
+  def validate_group
+    errors.add(self.group_id, "Group is not valid") unless Group.find_by_id(self.group_id)
+  end
 
-#   end
+  def validate_network
+    errors.add(self.network_id, "Network is not valid") unless Network.find_by(id: self.network_id)
+  end
 
-#   def validate_user
+  def validate_user
+    errors.add(self.user_id, "User is not valid") unless User.find_by(id: self.user_id)
+  end
 
-#   end
-
-#   def validate_link
-
-#   end
+  def validate_link
+    errors.add(self.link_id, "User is not valid") unless Link.find_by(id: self.link_id)
+  end
 
 
 # def authed

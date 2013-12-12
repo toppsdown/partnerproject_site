@@ -25,6 +25,7 @@ class GroupsController < ApplicationController
 	def create
 		# save group in database
 		@group = Group.new(group_params)
+    @group.network_id = current_user.network_id
 		if @group.save
 			redirect_to @group
 		else
