@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Linkshare</title>
+  <%= stylesheet_link_tag    "application", "" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body id ='toolBarBody'>
+	<ul id='sign-up-form'>
+	<%= form_for("user", :url => user_session_path) do |f| %>
+	 	<li>
+	  <%= f.text_field :email %>
+		</li><li>
+	  <%= f.password_field :password %>
+		<li>
+	  <%= f.check_box :remember_me %>
+	  	</li><li>
+	  <%= f.label :remember_me %>
+  		<li>
+	  <%= f.submit 'Sign in' %>
+	  	</li>
+	  <%= link_to "Forgot your password?", new_password_path('user') %>
+	<% end %>
+	</ul>
+</body>

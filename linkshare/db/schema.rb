@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20131211234845) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "groups", force: true do |t|
     t.integer "network_id"
     t.string  "name"

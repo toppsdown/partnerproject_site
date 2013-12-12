@@ -1,6 +1,9 @@
 class SharesController < ApplicationController
 
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, except: [:new,:create]
+  before_filter :authed?, only: [:new,:create]
+
+
 
   def index
     @shares = Share.order(:id)
@@ -11,7 +14,7 @@ class SharesController < ApplicationController
     # get the embedly for link URL
     
     @share = current_user.shares.new()
-    @share.build_link(url: params[:url])
+    embedify @share.build_link(url: params[:url])
     @groups = current_user.groups
     #raise @share.link.inspect
     #@share.build_link
@@ -50,6 +53,18 @@ class SharesController < ApplicationController
   def destroy
     # delete share
   end
+
+
+
+  def authed?
+    if user_signed_in?
+      return true
+    else
+      render :file => Rails.root + "/app/views/users/log_in.html.erb", layout: false
+      return false
+    end
+  end
+
 
   private
   def share_params
