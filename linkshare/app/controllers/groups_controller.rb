@@ -6,7 +6,7 @@ class GroupsController < ApplicationController
   def index
   # display list of groups for user to add
   # should be ordered by most relevant/popular
-    @groups = Group.order(:name)
+    @groups = Group.where(:network_id=>current_user).order(:name)
   end
 
   def show

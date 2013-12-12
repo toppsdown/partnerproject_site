@@ -1,4 +1,10 @@
-<h1>Welcome to <%= @group.name %></h1>
+<% if @group.solo? %>
+  <% group_name = @group.name.split("@").first %>
+  <h1>Welcome to <%= group_name %>'s Linkshare</h1>
+<% else %>
+  <h1>Welcome to the <%= @group.name %> Group</h1>
+<%end%>
+
 <div class="row display">
 <div class="small-4 large-4 columns"><%= @group.description %></div>
 </div>
