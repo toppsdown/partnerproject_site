@@ -26,6 +26,7 @@
         <% checkbox_id = "groups_" + g.id.to_s %>
         <%= check_box_tag checkbox_name, value=@groups[i].id, checked=false, {:class=>"group-select"}%>
         <%= label_tag g.name, image_tag("g.jpeg"), :for=>checkbox_id, :class=>"group-off"%>
+        <%= label_tag g.name %>
         <% else %>
         <p>This will be a dropdown</p>
         <% end %>

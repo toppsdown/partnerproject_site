@@ -7,12 +7,9 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  
+<%= render 'partials/logo_link' %>
 
-<% if current_user %>
-<%= link_to "logout", destroy_user_session_path, :method => :delete %>
-<% else %>
-<%= link_to "sign in", new_user_session_path %>
-<% end %>
 
 <%= render 'partials/navigation' %>
 
