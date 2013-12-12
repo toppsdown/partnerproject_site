@@ -33,3 +33,22 @@ body {
 .group-block {
   display: inline-block;
 }
+
+#link_info {
+  display: inline-block;
+}
+
+#link_info .link-icon {
+  width: auto;
+  max-height: 100%;
+  float: right;
+}
+
+#link_info h3 {
+  font-size: .7rem;
+  font-weight: bold;
+}
+
+#link_info h4 {
+  font-size: .7rem;
+}

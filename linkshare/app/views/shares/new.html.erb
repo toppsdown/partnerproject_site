@@ -32,8 +32,20 @@
       <%= s.hidden_field :network_id, value:1%>
       <%= s.fields_for :link do |l| %>
         <%= l.hidden_field :url,value: @share.link.url %>
-        <%= @share.link.title %><br />
-        <%= @share.link.description %>
+      <div class="row">
+        <div class="small-4 columns">
+          <%= image_tag @share.link.img_url, :class=>"link-icon" %>
+        </div>
+        <div class="small-8 columns">
+          <div class="row">
+            <h3><%= @share.link.id%></h3>
+            <h3><%= @share.link.title %></h3>
+          </div>
+          <div class="row">
+            <h4><%=raw truncate(@share.link.description, length: 132) %></h4>
+          </div>
+        </div>
+      </div>
       <% end %>
     </div>
     <div id="share" class="small-2 large-2 columns"><%= submit_tag %></div>

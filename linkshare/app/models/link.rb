@@ -5,6 +5,7 @@ class Link < ActiveRecord::Base
 
 
   before_save :check_if_original
+  after_initialize :check_if_original
 
   # get title, description, and image_url from embedly
   # save this info maybe?
@@ -13,9 +14,8 @@ class Link < ActiveRecord::Base
 
 
   def embedly
-    # do some embedly stuff
+    # make API call to embedly and get information
     siteinfo = getBasics(self.url) 
-      puts siteinfo
       self.title = siteinfo[0]
       self.description = siteinfo[1]
       self.img_url= siteinfo[2]
@@ -23,22 +23,17 @@ class Link < ActiveRecord::Base
 
 
   def check_if_original
-
     self.embedly
-
-    if origin = Link.where(title: self.title,description: self.description) 
-
+    if origin = Link.where(title: self.title, description: self.description).first
       return origin
+    else
+      return self
     end
-    # lookup whether entry exists in DB
+  end
 
-    # TRIED TO SAVE CALLS TO EMBEDLY BUT FUCK THAT
-    #if found_entry = Link.find_by(url: self.url)
-    # if so, fill in info
-    #  self.title = "Holy Crap" #found_entry.title
-    #  self.description = found_entry.description
-    #else
-
+  def self.get_original(url)
+    ret_link = Link.new(url: url)
+    return ret_link.check_if_original
   end
 
 

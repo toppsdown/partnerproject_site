@@ -14,7 +14,9 @@ class SharesController < ApplicationController
     # get the embedly for link URL
     
     @share = current_user.shares.new()
-    @share.build_link(url: params[:url])
+    #@share.build_link(url: params[:url])
+    #@share.link = Link.new(url: params[:url]).check_if_original
+    @share.link = Link.get_original(params[:url])
     @groups = current_user.groups.where(:private => false)
     #raise @share.link.inspect
     #@share.build_link
@@ -34,7 +36,9 @@ class SharesController < ApplicationController
         @share = current_user.shares.new(share_params)
         @share.group_id = g_id
         @share.network_id = current_user.network_id
-        @share.build_link(share_params[:link_attributes])
+        # this is really ugly, but it's the only way I could figure out how to not duplicate links
+        @share.link = Link.get_original(share_params[:link_attributes][:url])
+        #raise YAML::dump(@share.link)
         @share.save
       end
     end
@@ -71,7 +75,7 @@ class SharesController < ApplicationController
   private
   def share_params
    params.require(:share).permit(:user_id,:link_id,:network_id,:group_id,:reads,:votes,
-    :link_attributes => [:id,:title,:description,:url])
+    :link_attributes => [:url])#[:id,:title,:description,:url])
   end
 
 
