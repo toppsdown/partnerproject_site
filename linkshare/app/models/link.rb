@@ -11,13 +11,12 @@ class Link < ActiveRecord::Base
   # override new Link to get embed.ly information
       #raise @share.link.inspect
 
-  private
+
   def check_if_original
 
     self.embedly
 
-    origin = Link.where(title: self.title,description: self.description)
-    if origin
+    if origin = Link.where(title: self.title,description: self.description) 
       return origin
     end
     # lookup whether entry exists in DB
